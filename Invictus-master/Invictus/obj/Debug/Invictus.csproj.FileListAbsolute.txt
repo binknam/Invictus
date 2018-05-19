@@ -1,0 +1,9 @@
+C:\Users\User\Downloads\Compressed\Invictus-master\Invictus\bin\Debug\Invictus.exe.config
+C:\Users\User\Downloads\Compressed\Invictus-master\Invictus\obj\Debug\Invictus.csprojResolveAssemblyReference.cache
+C:\Users\User\Downloads\Compressed\Invictus-master\Invictus\obj\Debug\Form1.Frdangnhap.resources
+C:\Users\User\Downloads\Compressed\Invictus-master\Invictus\obj\Debug\Invictus.Properties.Resources.resources
+C:\Users\User\Downloads\Compressed\Invictus-master\Invictus\obj\Debug\Invictus.csproj.GenerateResource.Cache
+C:\Users\User\Downloads\Compressed\Invictus-master\Invictus\bin\Debug\Invictus.exe
+C:\Users\User\Downloads\Compressed\Invictus-master\Invictus\bin\Debug\Invictus.pdb
+C:\Users\User\Downloads\Compressed\Invictus-master\Invictus\obj\Debug\Invictus.exe
+C:\Users\User\Downloads\Compressed\Invictus-master\Invictus\obj\Debug\Invictus.pdb
