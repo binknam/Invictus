@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.bntdangnhap = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.grbdangnhap.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +52,7 @@
             this.grbdangnhap.Location = new System.Drawing.Point(39, 34);
             this.grbdangnhap.Name = "grbdangnhap";
             this.grbdangnhap.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.grbdangnhap.Size = new System.Drawing.Size(339, 168);
+            this.grbdangnhap.Size = new System.Drawing.Size(356, 190);
             this.grbdangnhap.TabIndex = 0;
             this.grbdangnhap.TabStop = false;
             this.grbdangnhap.Text = "Đăng Nhập Hệ Thống";
@@ -111,7 +112,7 @@
             this.bntdangnhap.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bntdangnhap.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bntdangnhap.ForeColor = System.Drawing.Color.Black;
-            this.bntdangnhap.Location = new System.Drawing.Point(66, 219);
+            this.bntdangnhap.Location = new System.Drawing.Point(56, 250);
             this.bntdangnhap.Name = "bntdangnhap";
             this.bntdangnhap.Size = new System.Drawing.Size(85, 27);
             this.bntdangnhap.TabIndex = 1;
@@ -125,7 +126,7 @@
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnExit.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.Color.Black;
-            this.btnExit.Location = new System.Drawing.Point(293, 219);
+            this.btnExit.Location = new System.Drawing.Point(310, 250);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(85, 27);
             this.btnExit.TabIndex = 1;
@@ -133,13 +134,25 @@
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // button1
+            // 
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(310, 5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(85, 31);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Dang ky";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Frdangnhap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gold;
-            this.ClientSize = new System.Drawing.Size(422, 281);
+            this.ClientSize = new System.Drawing.Size(447, 330);
             this.ControlBox = false;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.bntdangnhap);
             this.Controls.Add(this.grbdangnhap);
@@ -164,6 +177,7 @@
         private System.Windows.Forms.TextBox txtusername;
         private System.Windows.Forms.Button bntdangnhap;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button button1;
     }
 }
 

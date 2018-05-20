@@ -16,7 +16,12 @@ namespace Invictus
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1.Frdangnhap());
+            String config = System.IO.File.ReadAllText(@"DatabaseConfig.txt");
+            if (config == "")
+            {
+                Application.Run(new InitForm());
+            }
+            else Application.Run(new Form1.Frdangnhap());
         }
     }
 }
