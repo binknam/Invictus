@@ -47,27 +47,27 @@ namespace Invictus.Repository.Impl
             }
             return tableName;
         }
-    
+
         private DataSet loadResultSetById(String tableName, SqlConnection connection,
                                         SqlCommand statement, DataSet resultSet,
-                                        String queryStatement, I id) throws SQLException, ClassNotFoundException {
-        connection = connectionManager.getConnection();
-        String idColumn = "";
-        Field[] fields = getEntityClass().getDeclaredFields();
-        for (Field field: fields){
-            Id idAnnotation = field.getDeclaredAnnotation(Id.class);
-            Column column = field.getDeclaredAnnotation(Column.class);
-            if (idAnnotation != null){
-                idColumn = column.name();
-                break;
+                                        String queryStatement, I id) {
+            connection = connectionManager.getConnection();
+            String idColumn = "";
+            Field[] fields = getEntityClass().getDeclaredFields();
+            for (Field field: fields) {
+                Id idAnnotation = field.getDeclaredAnnotation(typeof(Id));
+                Column column = field.getDeclaredAnnotation(typeof(Column));
+                if (idAnnotation != null)
+                {
+                    idColumn = column.name();
+                    break;
+                }
             }
+            statement = connection.prepareStatement(String.format(queryStatement, tableName, idColumn));
+            statement.setObject(1, id);
+            resultSet = statement.executeQuery();
+            return resultSet;
         }
-        statement = connection.prepareStatement(String.format(queryStatement, tableName, idColumn));
-        statement.setObject(1, id);
-        resultSet = statement.executeQuery();
-        return  resultSet;
-    }
-
 
         protected abstract Type getEntityClass();
 

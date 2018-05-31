@@ -23,6 +23,7 @@ namespace Invictus.Utils
 
         private ConnectionManager()
         {
+
         }
 
         /**
