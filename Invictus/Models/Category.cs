@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace Invictus.Models
 {
-    [Table("CATEGORIES")]
+
+    [Table("Categories")]
     class Category
     {
         [Id]
         [Column("Id")]
-        private int id
+        private int Id
         {
-            get { return id; }
-            set { id = value; }
+            get { return Id; }
+            set { Id = value; }
         }
         [Column("Name")]
-        private String name
+        private String Name
         {
-            get { return name; }
-            set { name = value; }
+            get { return Name; }
+            set { Name = value; }
         }
     }
-}
 }

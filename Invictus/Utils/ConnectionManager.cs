@@ -21,10 +21,7 @@ namespace Invictus.Utils
         private String username;
         private String password;
 
-        private ConnectionManager()
-        {
-
-        }
+        private ConnectionManager() { }
 
         /**
          * This method should only be called ONCE when starting up the application
