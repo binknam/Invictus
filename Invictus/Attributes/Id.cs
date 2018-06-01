@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Invictus.Atributes
+namespace Invictus.Attributes
 {
-    [AttributeUsage(AttributeTargets.All)]
+    [AttributeUsage(AttributeTargets.Property)]
     class Id : Attribute
     {
         public Id() { }

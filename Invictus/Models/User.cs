@@ -1,4 +1,4 @@
-﻿using Invictus.Atributes;
+﻿using Invictus.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 namespace Invictus.Models
 {
     [Table("Users")]
-    class User
+    public class User
     {
         [Id]
         [Column("Username")]
-        private String Username
+        public String Username
         {
-            get { return Username; }
-            set { Username = value; }
+            get;
+            set;
         }
         [Column("Password")]
-        private String Password
+        public String Password
         {
-            get { return Password; }
-            set { Password = value; }
+            get;
+            set;
         }
     }
 }

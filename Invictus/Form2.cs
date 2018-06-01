@@ -1,11 +1,9 @@
-﻿using Invictus.Models;
-using Invictus.Repository;
-using Invictus.Repository.Impl;
-using Invictus.Utils;
+﻿using Invictus.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -16,14 +14,14 @@ using System.Xml;
 
 namespace Invictus
 {
-    public partial class Form1 : Form
+    public partial class Form2 : Form
     {
-        public Form1()
+        public Form2()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Form2_Load(object sender, EventArgs e)
         {
             XmlDataDocument xmldoc = new XmlDataDocument();
             XmlNodeList xmlnode;
@@ -39,13 +37,10 @@ namespace Invictus
             String url = @"Data Source=" + dataSource + ";Initial Catalog=" + dataBase + ";Integrated Security=True";
             ConnectionManager connectionManager = ConnectionManager.getInstance();
             connectionManager.initialize(url, null, null);
-            CategoryRepository categoryRepository = new CategoryRepositoryImpl();
-            Category category = categoryRepository.findById(1);
-
-            textBox1.DataBindings.Add("Text", category, "Id");
-            textBox2.DataBindings.Add("Text", category, "Name");
-
-            categoryRepository.create(category);
+            SqlDataAdapter dap = new SqlDataAdapter("Select * from categories", connectionManager.getConnection());
+            var table = new DataTable();
+            dap.Fill(table);
+            dataGridView1.DataSource = table;
         }
     }
 }

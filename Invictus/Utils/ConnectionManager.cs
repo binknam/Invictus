@@ -54,6 +54,8 @@ namespace Invictus.Utils
             sqlConnection.Open();
             return sqlConnection;
         }
+
         
+
     }
 }

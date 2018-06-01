@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Invictus.Atributes
+namespace Invictus.Attributes
 {
-    [AttributeUsage(AttributeTargets.All)]
-    class Table : Attribute
+    [AttributeUsage(AttributeTargets.Property)]
+    class Column : Attribute
     {
         private String name;
-        public Table(String name)
+        public Column(String name)
         {
             this.name = name;
         }

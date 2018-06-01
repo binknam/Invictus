@@ -1,4 +1,4 @@
-﻿using Invictus.Atributes;
+﻿using Invictus.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +9,20 @@ namespace Invictus.Models
 {
 
     [Table("Categories")]
-    class Category
+    public class Category
     {
         [Id]
         [Column("Id")]
-        private int Id
+        public int Id
         {
-            get { return Id; }
-            set { Id = value; }
+            get;
+            set;
         }
         [Column("Name")]
-        private String Name
+        public String Name
         {
-            get { return Name; }
-            set { Name = value; }
+            get;
+            set;
         }
     }
 }

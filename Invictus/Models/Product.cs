@@ -1,4 +1,4 @@
-﻿using Invictus.Atributes;
+﻿using Invictus.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,33 +8,33 @@ using System.Threading.Tasks;
 namespace Invictus.Models
 {
     [Table("PRODUCTS")]
-    class Product
+    public class Product
     {
         [Id]
         [Column("Id")]
-        private int id
+        public int id
         {
-            get { return id; }
-            set { id = value; }
+            get;
+            set;
         }
-        
+
         [Column("Name")]
-        private String name
+        public String name
         {
-            get { return name; }
-            set { name = value; }
+            get;
+            set;
         }
         [Column("CategoryId")]
-        private int CategoryId
+        public int CategoryId
         {
-            get { return CategoryId; }
-            set { CategoryId = value; }
+            get;
+            set;
         }
         [Column("Description")]
-        private String DesCription
+        public String DesCription
         {
-            get { return DesCription; }
-            set { DesCription = value; }
+            get;
+            set;
         }
     }
 }
