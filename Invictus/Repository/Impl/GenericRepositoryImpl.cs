@@ -16,29 +16,6 @@ namespace Invictus.Repository.Impl
     {
         protected ConnectionManager connectionManager = ConnectionManager.getInstance();
 
-        protected String getTableName(Type eClz)
-        {
-            Table table = (Table)eClz.GetCustomAttribute(typeof(Table));
-            String tableName = table.Name;
-            if ("" == tableName) {
-                tableName = eClz.Name;
-            }
-            return tableName;
-        }
-
-
-        protected abstract Type getEntityClass();
-
-        public void delete(I id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<E> findAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public E findById(I id)
         {
 
@@ -48,40 +25,24 @@ namespace Invictus.Repository.Impl
             tableName = getTableName(getEntityClass());
             E entity = (E)Activator.CreateInstance(getEntityClass());
 
-            SqlDataReader dataReader = loadResultSetById(tableName, connection, statement, Queries.SELECT_BY_ID_QUERY, id);
+            SqlDataReader dataReader = loadDataReaderById(tableName, ref connection, statement, Queries.SELECT_BY_ID_QUERY, id);
             if (dataReader.Read())
             {
                 entity = buildEntity(dataReader);
             }
-            dataReader.Close();
-            return entity;
-        }
-
-        protected E buildEntity(SqlDataReader dataReader)
-        {
-            E entity = (E)Activator.CreateInstance(getEntityClass());
-
-            //TODO: populate entity fields via Annotations (@Table, @Column) and Reflections
-            PropertyInfo[] props = getEntityClass().GetProperties(
-            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            entity = loadEntityFromResultSet(dataReader, entity, props, null);
-            return entity;
-        }
-
-        private E loadEntityFromResultSet(SqlDataReader dataReader, E entity, PropertyInfo[] props, Object mainTableObject)
-        {
-            foreach (PropertyInfo prop in props)
+            if (connection != null)
             {
-                Column column = (Column)prop.GetCustomAttribute(typeof(Column));
-                Object columnObject = null;
-                columnObject = dataReader[column.Name];
-                prop.SetValue(entity, columnObject);
+                dataReader.Close();
+                connection.Close();
             }
             return entity;
         }
 
-        private SqlDataReader loadResultSetById(String tableName, SqlConnection connection,
-                                        SqlCommand statement, String queryStatement, I id)
+
+
+
+        private SqlDataReader loadDataReaderById(String tableName, ref SqlConnection connection,
+                                            SqlCommand statement, String queryStatement, I id)
         {
             connection = connectionManager.getConnection();
             String idColumn = "";
@@ -105,6 +66,37 @@ namespace Invictus.Repository.Impl
             return dataReader;
         }
 
+        public List<E> findAll()
+        {
+            String tableName = getTableName(getEntityClass());
+
+            List<E> result = new List<E>();
+            SqlConnection connection = null;
+            SqlCommand statement = null;
+            SqlDataReader dataReader = loadDataReader(tableName, ref connection, ref statement, Queries.SELECT_ALL_QUERY);
+            while (dataReader.Read())
+            {
+                result.Add(buildEntity(dataReader));
+            }
+            if (connection != null)
+            {
+                connection.Close();
+                dataReader.Close();
+
+            }
+            return result;
+        }
+
+        protected SqlDataReader loadDataReader(String tableName, ref SqlConnection connection,
+                                    ref SqlCommand statement,
+                                    String queryStatement)
+        {
+            connection = connectionManager.getConnection();
+            statement = new SqlCommand(String.Format(queryStatement, tableName), connection);
+            SqlDataReader dataReader = statement.ExecuteReader();
+            return dataReader;
+        }
+
         public void create(E entity)
         {
             // TODO: implement me
@@ -115,18 +107,23 @@ namespace Invictus.Repository.Impl
             PropertyInfo[] props = getEntityClass().GetProperties(
             BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
-            statement = buildInsertStatement(props, connection, entity);
+            statement = buildInsertStatement(props, ref connection, entity);
 
             statement.ExecuteNonQuery();
+            if (connection != null)
+            {
+                connection.Close();
+            }
         }
 
-        public SqlCommand buildInsertStatement(PropertyInfo[] props, SqlConnection connection, E entity)
+        public SqlCommand buildInsertStatement(PropertyInfo[] props, ref SqlConnection connection, E entity)
         {
             SqlCommand statement = buildParamInsertStatement(props, connection);
 
             List<Object> entityFieldObjects = getEntityFieldObjects(props, entity);
 
-            for (int i = 0; i < entityFieldObjects.Count - 1; i++) {
+            for (int i = 0; i < entityFieldObjects.Count - 1; i++)
+            {
                 statement.Parameters.AddWithValue("@param" + i, entityFieldObjects[i]);
             }
 
@@ -164,29 +161,159 @@ namespace Invictus.Repository.Impl
             return new SqlCommand(String.Format(Queries.INSERT_QUERY, tableName, columnNames, columnValues), connection);
         }
 
+        public void update(E entity)
+        {
+            // TODO: implement me
+            SqlConnection connection = null;
+            SqlCommand statement = null;
+            connection = connectionManager.getConnection();
+            PropertyInfo[] props = getEntityClass().GetProperties(
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+            statement = buildUpdateStatment(props, ref connection, entity);
+
+            statement.ExecuteNonQuery();
+
+            if (connection != null)
+            {
+                connection.Close();
+            }
+        }
+
+        private SqlCommand buildUpdateStatment(PropertyInfo[] props, ref SqlConnection connection, E entity)
+        {
+            int idIndex = 0;
+            SqlCommand statement = buildParamUpdateStatement(props, ref idIndex, connection);
+
+            List<Object> entityFieldObjects = getEntityFieldObjects(props, entity);
+
+            for (int i = 0; i < entityFieldObjects.Count(); i++)
+            {
+                statement.Parameters.AddWithValue("@param" + (i + 1), entityFieldObjects[i]);
+            }
+            statement.Parameters.AddWithValue("@param" + idIndex, entityFieldObjects[entityFieldObjects.Count - 1]);
+            return statement;
+        }
+
+
+        private SqlCommand buildParamUpdateStatement(PropertyInfo[] props, ref int idIndex, SqlConnection connection)
+        {
+            String tableName = getTableName(getEntityClass());
+            String updateQueryParam = "";
+            List<String> columnNames = new List<String>();
+
+            for (int i = 0; i < props.Count(); i++)
+            {
+                IEnumerable<Attribute> attributes = props[i].GetCustomAttributes();
+                foreach (Attribute attribute in attributes)
+                {
+                    if (attribute.GetType() == typeof(Column))
+                    {
+                        Column column = (Column)attribute;
+                        columnNames.Add(column.Name);
+                    }
+                    if (attribute.GetType() == typeof(Id))
+                    {
+                        idIndex = i;
+                    }
+                }
+            }
+
+            for (int i = 0; i < columnNames.Count(); i++)
+            {
+                if (i != idIndex)
+                {
+                    updateQueryParam += columnNames[i] + "=@param" + i + ",";
+                }
+            }
+            updateQueryParam = updateQueryParam.Substring(0, updateQueryParam.Count() - 1);
+            updateQueryParam += " WHERE " + columnNames[idIndex] + "=@param" + idIndex;
+
+            return new SqlCommand(String.Format(Queries.UPDATE_QUERY, tableName, updateQueryParam), connection);
+        }
+
+        public void delete(I id)
+        {
+            String tableName = getTableName(getEntityClass());
+
+            SqlConnection connection = null;
+            SqlCommand statement = null;
+            deleteById(tableName, ref connection, statement, Queries.DELETE_BY_ID_QUERY, id);
+            if (connection != null)
+            {
+                connection.Close();
+            }
+        }
+
+        private void deleteById(String tableName, ref SqlConnection connection, SqlCommand statement,
+                                        String queryStatement, I id)
+        {
+            connection = connectionManager.getConnection();
+            statement = new SqlCommand(String.Format(queryStatement, tableName), connection);
+            statement.Parameters.AddWithValue("@param", id);
+            statement.ExecuteNonQuery();
+        }
+
+
+        protected String getTableName(Type eClz)
+        {
+            Table table = (Table)eClz.GetCustomAttribute(typeof(Table));
+            String tableName = table.Name;
+            if ("" == tableName)
+            {
+                tableName = eClz.Name;
+            }
+            return tableName;
+        }
+
+
+        protected abstract Type getEntityClass();
+
+        protected E buildEntity(SqlDataReader dataReader)
+        {
+            E entity = (E)Activator.CreateInstance(getEntityClass());
+
+            //TODO: populate entity fields via Annotations (@Table, @Column) and Reflections
+            PropertyInfo[] props = getEntityClass().GetProperties(
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            entity = loadEntityFromResultSet(dataReader, entity, props, null);
+            return entity;
+        }
+
+        private E loadEntityFromResultSet(SqlDataReader dataReader, E entity, PropertyInfo[] props, Object mainTableObject)
+        {
+            foreach (PropertyInfo prop in props)
+            {
+                Column column = (Column)prop.GetCustomAttribute(typeof(Column));
+                Object columnObject = null;
+                columnObject = dataReader[column.Name];
+                prop.SetValue(entity, columnObject);
+            }
+            return entity;
+        }
+
+
         private List<Object> getEntityFieldObjects(PropertyInfo[] props, E entity)
         {
             List<Object> entityFieldObjects = new List<Object>();
             Object entityId = null;
-            foreach (PropertyInfo prop in props) {
+            foreach (PropertyInfo prop in props)
+            {
                 Id id = (Id)prop.GetCustomAttribute(typeof(Id));
                 Column column = (Column)prop.GetCustomAttribute(typeof(Column));
-                if (id != null) {
+                if (id != null)
+                {
                     entityId = prop.GetValue(entity);
                     continue;
                 }
                 Object entityObject = prop.GetValue(entity);
-                
+
                 entityFieldObjects.Add(entityObject);
             }
             entityFieldObjects.Add(entityId);
             return entityFieldObjects;
         }
 
-        public void update(E entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 

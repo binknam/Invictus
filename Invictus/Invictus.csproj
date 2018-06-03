@@ -47,9 +47,12 @@
   <ItemGroup>
     <Compile Include="Attributes\Column.cs" />
     <Compile Include="Attributes\Id.cs" />
+    <Compile Include="Attributes\RepoInterfaceImpl.cs" />
+    <Compile Include="Attributes\RepoInterface.cs" />
     <Compile Include="Attributes\Table.cs" />
     <Compile Include="Constants\ProductProperties.cs" />
     <Compile Include="Constants\Queries.cs" />
+    <Compile Include="Controls\MyIoC.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +64,12 @@
     </Compile>
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AbstractForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AbstractForm.Designer.cs">
+      <DependentUpon>AbstractForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Product.cs" />
@@ -81,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AbstractForm.resx">
+      <DependentUpon>AbstractForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

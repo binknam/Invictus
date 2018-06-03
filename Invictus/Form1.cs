@@ -45,7 +45,8 @@ namespace Invictus
             textBox1.DataBindings.Add("Text", category, "Id");
             textBox2.DataBindings.Add("Text", category, "Name");
 
-            categoryRepository.create(category);
+            category.Name = "MY PHjONE";
+            categoryRepository.delete(5);
         }
     }
 }

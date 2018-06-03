@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Invictus.Repository
 {
-    interface GenericRepository<E,I>
+    public interface GenericRepository<E,I>
     {
         E findById(I id);
         List<E> findAll();

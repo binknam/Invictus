@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -55,7 +56,19 @@ namespace Invictus.Utils
             return sqlConnection;
         }
 
-        
-
+        public static void close(IDbConnection connection)
+        {
+            if (connection == null)
+            {
+                return;
+            }
+            try
+            {
+                connection.Close();
+            }
+            catch (Exception ignore)
+            {
+            }
+        }
     }
 }

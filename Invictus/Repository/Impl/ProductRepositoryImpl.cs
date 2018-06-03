@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Invictus.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Invictus.Repository.Impl
 {
-    class ProductRepositoryImpl
+    [RepoInterfaceImpl]
+    class ProductRepositoryImpl : Ge
     {
     }
 }
