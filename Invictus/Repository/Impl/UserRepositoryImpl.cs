@@ -1,4 +1,5 @@
 ﻿using Invictus.Attributes;
+using Invictus.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,12 @@ using System.Threading.Tasks;
 
 namespace Invictus.Repository.Impl
 {
-    [RepoInterfaceImpl(typeof(CategoryRepository))]
-    class UserRepositoryImpl
+    [RepoInterfaceImpl(typeof(User))]
+    class UserRepositoryImpl : GenericRepositoryImpl<User, String>
     {
+        protected override Type getEntityClass()
+        {
+            return typeof(User);
+        }
     }
 }

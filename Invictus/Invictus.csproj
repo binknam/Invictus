@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,28 +49,21 @@
     <Compile Include="Attributes\Column.cs" />
     <Compile Include="Attributes\Id.cs" />
     <Compile Include="Attributes\RepoInterfaceImpl.cs" />
-    <Compile Include="Attributes\RepoInterface.cs" />
     <Compile Include="Attributes\Table.cs" />
     <Compile Include="Constants\ProductProperties.cs" />
     <Compile Include="Constants\Queries.cs" />
     <Compile Include="Controls\MyIoC.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Forms\CategoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\CategoryForm.Designer.cs">
+      <DependentUpon>CategoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form2.cs">
+    <Compile Include="Forms\InvictusBaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\AbstractForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AbstractForm.Designer.cs">
-      <DependentUpon>AbstractForm.cs</DependentUpon>
+    <Compile Include="Forms\InvictusBaseForm.Designer.cs">
+      <DependentUpon>InvictusBaseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Product.cs" />
@@ -85,14 +79,8 @@
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Utils\ConnectionManager.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AbstractForm.resx">
-      <DependentUpon>AbstractForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\InvictusBaseForm.resx">
+      <DependentUpon>InvictusBaseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

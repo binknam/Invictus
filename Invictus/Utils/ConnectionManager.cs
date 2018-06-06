@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Invictus.Utils
 {
@@ -18,36 +20,19 @@ namespace Invictus.Utils
             return instance;
         }
 
-        private String url;
-        private String username;
-        private String password;
-
-        private ConnectionManager() { }
-
-        /**
-         * This method should only be called ONCE when starting up the application
-         */
-        public void initialize(String url, String username, String password)
-        {
-            this.url = url;
-            this.username = username;
-            this.password = password;
-            sqlConnection = new SqlConnection(this.url);
-        }
-
-        public String getUrl()
-        {
-            return url;
-        }
-
-        public String getUsername()
-        {
-            return username;
-        }
-
-        public String getPassword()
-        {
-            return password;
+        private ConnectionManager() {
+            XmlDataDocument xmldoc = new XmlDataDocument();
+            XmlNodeList xmlnode;
+            String dataSource = "";
+            String dataBase = "";
+            FileStream fs = new FileStream("databaseConfig.xml", FileMode.Open, FileAccess.Read);
+            xmldoc.Load(fs);
+            xmlnode = xmldoc.GetElementsByTagName("datasource");
+            dataSource = xmlnode[0].InnerText.Trim();
+            xmlnode = xmldoc.GetElementsByTagName("database");
+            dataBase = xmlnode[0].InnerText.Trim();
+            String url = @"Data Source=" + dataSource + ";Initial Catalog=" + dataBase + ";Integrated Security=True";
+            sqlConnection = new SqlConnection(url);
         }
 
         public SqlConnection getConnection()

@@ -10,24 +10,35 @@ namespace Invictus.Controls
 {
     public class MyIoC
     {
-        private Dictionary<Type, Object> managedObjects = new Dictionary<Type, Object>();
+        private Dictionary<Type, Object> managedObjects;
+
+        public MyIoC()
+        {
+            managedObjects= new Dictionary<Type, Object>();
+        }
 
         public void initialize()
         {
-            foreach(Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            foreach (Type type in assembly.GetTypes())
             {
-                foreach (Type type in assembly.GetTypes())
+                RepoInterfaceImpl repoInterfaceImpl = (RepoInterfaceImpl)type.GetCustomAttribute(typeof(RepoInterfaceImpl));
+                if (repoInterfaceImpl != null)
                 {
-                    RepoInterfaceImpl repoInterfaceImpl = (RepoInterfaceImpl)type.GetCustomAttribute(typeof(RepoInterfaceImpl));
                     managedObjects.Add(repoInterfaceImpl.TypeOfSuper, Activator.CreateInstance(type));
                 }
             }
+
 
         }
 
         public Object get(Type type)
         {
-            return managedObjects[type];
+            if (managedObjects.ContainsKey(type))
+            {
+                return managedObjects[type];
+            }
+            return null;
         }
     }
 }

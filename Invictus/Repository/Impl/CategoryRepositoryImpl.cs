@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Invictus.Repository.Impl
 {
-    [RepoInterfaceImpl(typeof(CategoryRepository))]
+    [RepoInterfaceImpl(typeof(Category))]
     class CategoryRepositoryImpl : GenericRepositoryImpl<Category, int>, CategoryRepository
     {
         protected override Type getEntityClass()
