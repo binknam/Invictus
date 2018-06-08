@@ -62,6 +62,7 @@
             this.Controls.Add(this.label1);
             this.Name = "ObjectDetailsForm";
             this.Text = "ObjectDetailsForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ObjectDetailsForm_FormClosing);
             this.Load += new System.EventHandler(this.ObjectDetailsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

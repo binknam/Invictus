@@ -21,6 +21,9 @@ namespace Invictus.Forms
         protected E entity;
         protected PropertyInfo[] props;
 
+        public static int CREATE_MODE = 0;
+        public static int UPDATE_MODE = 1;
+
         protected InvictusBaseForm<E, I> mainForm;
 
         private List<Label> labels = new List<Label>();
@@ -45,7 +48,7 @@ namespace Invictus.Forms
                 TextBox textBox = new TextBox();
                 Id idAnnotation = (Id)props[i].GetCustomAttribute(typeof(Id));
                 Column column = (Column)props[i].GetCustomAttribute(typeof(Column));
-                if (idAnnotation != null)
+                if (idAnnotation != null && type == 1)
                 {
                     textBox.Enabled = false;
                 }
@@ -65,33 +68,50 @@ namespace Invictus.Forms
             }
             Height = props.Length * 200;
             createOrUpdateBtn.Top = Height - 100;
-            if (type == 0)
+            if (type == CREATE_MODE)
             {
                 createOrUpdateBtn.Text = "Create";
                 entity = (E)Activator.CreateInstance(typeof(E));
+                
             }
-            if (type == 1)
+            if (type == UPDATE_MODE)
             {
                 createOrUpdateBtn.Text = "Update";
+            }
+            for (int i = 0; i < props.Length; i++)
+            {
+                textBoxes[i].DataBindings.Add("Text", entity, props[i].Name);
             }
         }
 
         private void createOrUpdateBtn_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < props.Length; i++)
+            if (type == CREATE_MODE)
             {
-                if (props[i].GetCustomAttribute(typeof(Id)) != null)
+                I id = (I)props[0].GetValue(entity);
+                if (!repository.isExisted(id))
                 {
-                    props[i].SetValue(entity, -1);
-                }
-                else
-                {
-                    props[i].SetValue(entity, textBoxes[i].Text);
+                    repository.create(entity);
                 }
             }
-            repository.create(entity);
+            if (type == UPDATE_MODE)
+            {
+                repository.update(entity);
+            }
             mainForm.updateDataGridView();
+            mainForm.Enabled = true;
             Close();
+        }
+
+        private void ObjectDetailsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            mainForm.updateDataGridView();
+            mainForm.Enabled = true;
+        }
+
+        public void setEntity(E entity)
+        {
+            this.entity = entity;
         }
     }
 }

@@ -67,9 +67,9 @@ namespace Invictus.Forms
         private void createBtn_Click(object sender, EventArgs e)
         {
             createForm = new ObjectDetailsForm<E, I>(this);
-            createForm.type = 0;
+            createForm.type = ObjectDetailsForm<E, I>.CREATE_MODE;
             createForm.Show();
-            //Enabled = false;
+            Enabled = false;
         }
 
         public void updateDataGridView()
@@ -85,6 +85,22 @@ namespace Invictus.Forms
         private void deleteBtn_Click(object sender, EventArgs e)
         {
             repository.delete(selectedEntityId);
+            updateDataGridView();
+        }
+
+        private void dataGridView_MouseClick(object sender, MouseEventArgs e)
+        {
+            selectedEntityId = (I)dataGridView.CurrentRow.Cells[columnIdIndex].Value;
+        }
+
+        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            updateForm = new ObjectDetailsForm<E, I>(this);
+            E entity = repository.findById(selectedEntityId);
+            updateForm.setEntity(entity);
+            updateForm.type = ObjectDetailsForm<E,I>.UPDATE_MODE;
+            updateForm.Show();
+            Enabled = false;
         }
     }
 }

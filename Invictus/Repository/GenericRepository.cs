@@ -13,5 +13,6 @@ namespace Invictus.Repository
         void create(E entity);
         void update(E entity);
         void delete(I id);
+        Boolean isExisted(I id);
     }
 }

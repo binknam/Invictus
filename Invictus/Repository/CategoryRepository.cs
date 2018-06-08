@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Invictus.Repository
 {
-    interface CategoryRepository : GenericRepository<Category, int>
+    interface CategoryRepository : GenericRepository<Category, Int64>
     {
     }
 }

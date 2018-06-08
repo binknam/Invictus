@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Invictus.Forms
 {
-    public partial class CategoryForm : InvictusBaseForm<Category, Int64>
+    public partial class UserForm : InvictusBaseForm<User, String>
     {
-        public CategoryForm()
+        public UserForm()
         {
             InitializeComponent();
         }

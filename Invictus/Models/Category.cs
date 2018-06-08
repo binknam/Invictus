@@ -13,7 +13,7 @@ namespace Invictus.Models
     {
         [Id]
         [Column("Id")]
-        public int Id
+        public Int64 Id
         {
             get;
             set;

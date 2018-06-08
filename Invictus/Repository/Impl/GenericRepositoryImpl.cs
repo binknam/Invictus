@@ -23,7 +23,7 @@ namespace Invictus.Repository.Impl
             SqlConnection connection = null;
             SqlCommand statement = null;
             tableName = getTableName(getEntityClass());
-            E entity = (E)Activator.CreateInstance(getEntityClass());
+            E entity = default(E);
 
             SqlDataReader dataReader = loadDataReaderById(tableName, ref connection, statement, Queries.SELECT_BY_ID_QUERY, id);
             if (dataReader.Read())
@@ -122,7 +122,7 @@ namespace Invictus.Repository.Impl
 
             List<Object> entityFieldObjects = getEntityFieldObjects(props, entity);
 
-            for (int i = 0; i < entityFieldObjects.Count - 1; i++)
+            for (int i = 0; i < entityFieldObjects.Count; i++)
             {
                 statement.Parameters.AddWithValue("@param" + i, entityFieldObjects[i]);
             }
@@ -136,16 +136,13 @@ namespace Invictus.Repository.Impl
             String columnNames = "";
             String columnValues = "";
 
+
+            int i = 0;
             foreach (PropertyInfo prop in props)
             {
                 IEnumerable<Attribute> attributes = prop.GetCustomAttributes();
-                int i = 0;
                 foreach (Attribute attribute in attributes)
                 {
-                    if (attribute.GetType() == typeof(Id))
-                    {
-                        break;
-                    }
                     if (attribute.GetType() == typeof(Column))
                     {
                         Column column = (Column)attribute;
@@ -189,9 +186,8 @@ namespace Invictus.Repository.Impl
 
             for (int i = 0; i < entityFieldObjects.Count(); i++)
             {
-                statement.Parameters.AddWithValue("@param" + (i + 1), entityFieldObjects[i]);
+                statement.Parameters.AddWithValue("@param" + i, entityFieldObjects[i]);
             }
-            statement.Parameters.AddWithValue("@param" + idIndex, entityFieldObjects[entityFieldObjects.Count - 1]);
             return statement;
         }
 
@@ -249,7 +245,20 @@ namespace Invictus.Repository.Impl
                                         String queryStatement, I id)
         {
             connection = connectionManager.getConnection();
-            statement = new SqlCommand(String.Format(queryStatement, tableName), connection);
+            String idColumn = "";
+            PropertyInfo[] props = getEntityClass().GetProperties(
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            foreach (PropertyInfo prop in props)
+            {
+                Id idAnnotation = (Id)prop.GetCustomAttribute(typeof(Id));
+                Column column = (Column)prop.GetCustomAttribute(typeof(Column));
+                if (idAnnotation != null)
+                {
+                    idColumn = column.Name;
+                    break;
+                }
+            }
+            statement = new SqlCommand(String.Format(queryStatement, tableName, idColumn), connection);
             statement.Parameters.AddWithValue("@param", id);
             statement.ExecuteNonQuery();
         }
@@ -296,24 +305,21 @@ namespace Invictus.Repository.Impl
         private List<Object> getEntityFieldObjects(PropertyInfo[] props, E entity)
         {
             List<Object> entityFieldObjects = new List<Object>();
-            Object entityId = null;
             foreach (PropertyInfo prop in props)
             {
                 Id id = (Id)prop.GetCustomAttribute(typeof(Id));
                 Column column = (Column)prop.GetCustomAttribute(typeof(Column));
-                if (id != null)
-                {
-                    entityId = prop.GetValue(entity);
-                    continue;
-                }
                 Object entityObject = prop.GetValue(entity);
-
                 entityFieldObjects.Add(entityObject);
             }
-            entityFieldObjects.Add(entityId);
             return entityFieldObjects;
         }
 
+        public bool isExisted(I id)
+        {
+            E entity = findById(id);
+            return (entity != null);
+        }
     }
 }
 
