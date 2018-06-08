@@ -12,12 +12,15 @@ namespace Invictus.Controls
     {
         private Dictionary<Type, Object> managedObjects;
 
-        public MyIoC()
+        private static MyIoC instance = new MyIoC();
+
+        private MyIoC()
         {
             managedObjects= new Dictionary<Type, Object>();
+            initialize();
         }
 
-        public void initialize()
+        private void initialize()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
             foreach (Type type in assembly.GetTypes())
@@ -28,8 +31,11 @@ namespace Invictus.Controls
                     managedObjects.Add(repoInterfaceImpl.TypeOfSuper, Activator.CreateInstance(type));
                 }
             }
+        }
 
-
+        public static MyIoC getInstance()
+        {
+            return instance;
         }
 
         public Object get(Type type)

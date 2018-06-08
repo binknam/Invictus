@@ -65,6 +65,12 @@
     <Compile Include="Forms\InvictusBaseForm.Designer.cs">
       <DependentUpon>InvictusBaseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ObjectDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ObjectDetailsForm.Designer.cs">
+      <DependentUpon>ObjectDetailsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\User.cs" />
@@ -81,6 +87,9 @@
     <Compile Include="Utils\ConnectionManager.cs" />
     <EmbeddedResource Include="Forms\InvictusBaseForm.resx">
       <DependentUpon>InvictusBaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ObjectDetailsForm.resx">
+      <DependentUpon>ObjectDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

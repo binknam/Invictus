@@ -18,10 +18,15 @@ namespace Invictus.Forms
     {
         protected GenericRepository<E, I> repository;
         protected MyIoC myIoC;
+        protected ObjectDetailsForm<E, I> createForm;
+        protected ObjectDetailsForm<E, I> updateForm;
+
+        protected int columnIdIndex = 0;
+        protected I selectedEntityId;
+
         public InvictusBaseForm()
         {
-            myIoC = new MyIoC();
-            myIoC.initialize();
+            myIoC = MyIoC.getInstance();
             repository = (GenericRepository<E, I>)myIoC.get(typeof(E));
             InitializeComponent();
         }
@@ -33,11 +38,53 @@ namespace Invictus.Forms
             List<E> objects = repository.findAll();
             BindingList<E> list = new BindingList<E>(objects);
             dataGridView.DataSource = list;
+
+            String columnIdName = "";
+
+            PropertyInfo[] props = typeof(E).GetProperties(
+                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            for (int i = 0; i < props.Length; i++)
+            {
+                Id idAnnotation = (Id)props[i].GetCustomAttribute(typeof(Id));
+                Column column = (Column)props[i].GetCustomAttribute(typeof(Column));
+                if (idAnnotation != null)
+                {
+                    columnIdName = column.Name;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < dataGridView.Columns.Count; i++)
+            {
+                if (dataGridView.Columns[i].Name == columnIdName)
+                {
+                    columnIdIndex = i;
+                    break;
+                }
+            }
         }
 
         private void createBtn_Click(object sender, EventArgs e)
         {
-            createBtn.Text = "aa";
+            createForm = new ObjectDetailsForm<E, I>(this);
+            createForm.type = 0;
+            createForm.Show();
+            //Enabled = false;
+        }
+
+        public void updateDataGridView()
+        {
+            InvictusBaseForm_Load(null, null);
+        }
+
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            selectedEntityId = (I)dataGridView.CurrentRow.Cells[columnIdIndex].Value;
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            repository.delete(selectedEntityId);
         }
     }
 }
