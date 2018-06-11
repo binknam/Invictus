@@ -23,6 +23,7 @@ namespace Invictus.Forms
 
         public static int CREATE_MODE = 0;
         public static int UPDATE_MODE = 1;
+        public static int REGISTER_MODE = 2;
 
         protected InvictusBaseForm<E, I> mainForm;
 
@@ -35,6 +36,13 @@ namespace Invictus.Forms
             myIoC = MyIoC.getInstance();
             repository = (GenericRepository<E, I>)myIoC.get(typeof(E));
             this.mainForm = mainForm;
+            InitializeComponent();
+        }
+
+        public ObjectDetailsForm()
+        {
+            myIoC = MyIoC.getInstance();
+            repository = (GenericRepository<E, I>)myIoC.get(typeof(E));
             InitializeComponent();
         }
 
@@ -68,7 +76,7 @@ namespace Invictus.Forms
             }
             Height = props.Length * 200;
             createOrUpdateBtn.Top = Height - 100;
-            if (type == CREATE_MODE)
+            if (type == CREATE_MODE || type == REGISTER_MODE)
             {
                 createOrUpdateBtn.Text = "Create";
                 entity = (E)Activator.CreateInstance(typeof(E));
@@ -86,27 +94,44 @@ namespace Invictus.Forms
 
         private void createOrUpdateBtn_Click(object sender, EventArgs e)
         {
-            if (type == CREATE_MODE)
+            Boolean canDoAction = true;
+            foreach (TextBox textBox in textBoxes)
             {
-                I id = (I)props[0].GetValue(entity);
-                if (!repository.isExisted(id))
+                if (textBox.Text == "")
                 {
-                    repository.create(entity);
+                    canDoAction = false;
                 }
             }
-            if (type == UPDATE_MODE)
+            if (canDoAction)
             {
-                repository.update(entity);
+                if (type == CREATE_MODE || type == REGISTER_MODE)
+                {
+                    I id = (I)props[0].GetValue(entity);
+                    if (!repository.isExisted(id))
+                    {
+                        repository.create(entity);
+                    }
+                }
+                if (type == UPDATE_MODE)
+                {
+                    repository.update(entity);
+                }
+                if (type != REGISTER_MODE)
+                {
+                    mainForm.updateDataGridView();
+                    mainForm.Enabled = true;
+                }
+                Close();
             }
-            mainForm.updateDataGridView();
-            mainForm.Enabled = true;
-            Close();
         }
 
         private void ObjectDetailsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            mainForm.updateDataGridView();
-            mainForm.Enabled = true;
+            if (type != REGISTER_MODE)
+            {
+                mainForm.updateDataGridView();
+                mainForm.Enabled = true;
+            }
         }
 
         public void setEntity(E entity)

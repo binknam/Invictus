@@ -16,7 +16,7 @@ namespace Invictus
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.CategoryForm());
+            Application.Run(new MemberShip.InvictusLoginForm());
         }
     }
 }

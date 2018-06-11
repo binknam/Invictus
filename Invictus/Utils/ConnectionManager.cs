@@ -10,7 +10,7 @@ using System.Xml;
 
 namespace Invictus.Utils
 {
-    class ConnectionManager
+    public class ConnectionManager
     {
         private static  ConnectionManager instance = new ConnectionManager();
         private static SqlConnection sqlConnection;

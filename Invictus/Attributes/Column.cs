@@ -19,5 +19,6 @@ namespace Invictus.Attributes
         {
             get { return name; }
         }
+        
     }
 }

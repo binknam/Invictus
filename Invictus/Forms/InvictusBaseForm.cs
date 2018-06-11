@@ -1,5 +1,6 @@
 ﻿using Invictus.Attributes;
 using Invictus.Controls;
+using Invictus.MemberShip;
 using Invictus.Repository;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,12 @@ namespace Invictus.Forms
         protected MyIoC myIoC;
         protected ObjectDetailsForm<E, I> createForm;
         protected ObjectDetailsForm<E, I> updateForm;
+        protected InvictusUser currentUser;
+        protected InvictusRole currentUserRole;
+        protected InvictusRoleRepository roleRepository;
+        protected List<E> objects;
+        protected BindingList<E> bindingList;
+        protected PropertyInfo[] props;
 
         protected int columnIdIndex = 0;
         protected I selectedEntityId;
@@ -28,40 +35,65 @@ namespace Invictus.Forms
         {
             myIoC = MyIoC.getInstance();
             repository = (GenericRepository<E, I>)myIoC.get(typeof(E));
+            roleRepository = new InvictusRoleRepository();
+            currentUser = new InvictusUser();
+            currentUserRole = new InvictusRole();
             InitializeComponent();
         }
 
         private void InvictusBaseForm_Load(object sender, EventArgs e)
         {
+            if (currentUser.RoleName == "Admin")
+            {
+                manageUserLink.Visible = true;
+            }
             Table table = (Table)typeof(E).GetCustomAttribute(typeof(Table));
             tableNamelb.Text = table.Name;
-            List<E> objects = repository.findAll();
-            BindingList<E> list = new BindingList<E>(objects);
-            dataGridView.DataSource = list;
-
-            String columnIdName = "";
-
-            PropertyInfo[] props = typeof(E).GetProperties(
-                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            for (int i = 0; i < props.Length; i++)
+            if (currentUserRole.canRead)
             {
-                Id idAnnotation = (Id)props[i].GetCustomAttribute(typeof(Id));
-                Column column = (Column)props[i].GetCustomAttribute(typeof(Column));
-                if (idAnnotation != null)
+                String columnIdName = "";
+
+                props = typeof(E).GetProperties(
+                         BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                for (int i = 0; i < props.Length; i++)
                 {
-                    columnIdName = column.Name;
-                    break;
+                    Id idAnnotation = (Id)props[i].GetCustomAttribute(typeof(Id));
+                    Column column = (Column)props[i].GetCustomAttribute(typeof(Column));
+                    if (idAnnotation != null)
+                    {
+                        columnIdName = column.Name;
+                        break;
+                    }
                 }
+
+                for (int i = 0; i < dataGridView.Columns.Count; i++)
+                {
+                    if (dataGridView.Columns[i].Name == columnIdName)
+                    {
+                        columnIdIndex = i;
+                        break;
+                    }
+                }
+                objects = repository.findAll();
+                bindingList = new BindingList<E>(objects);
+                dataGridView.DataSource = bindingList;
             }
 
-            for (int i = 0; i < dataGridView.Columns.Count; i++)
+            if (!currentUserRole.canCreate)
             {
-                if (dataGridView.Columns[i].Name == columnIdName)
-                {
-                    columnIdIndex = i;
-                    break;
-                }
+                createBtn.Enabled = false;
             }
+
+            if (!currentUserRole.canDelete)
+            {
+                deleteBtn.Enabled = false;
+            }
+
+            if (!currentUserRole.canUpdate)
+            {
+                updateBtn.Enabled = false;
+            }
+
         }
 
         private void createBtn_Click(object sender, EventArgs e)
@@ -95,12 +127,74 @@ namespace Invictus.Forms
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            updateForm = new ObjectDetailsForm<E, I>(this);
-            E entity = repository.findById(selectedEntityId);
-            updateForm.setEntity(entity);
-            updateForm.type = ObjectDetailsForm<E,I>.UPDATE_MODE;
-            updateForm.Show();
+            if (currentUserRole.canUpdate)
+            {
+                updateForm = new ObjectDetailsForm<E, I>(this);
+                E entity = getCurrentEntity();
+                updateForm.setEntity(entity);
+                updateForm.type = ObjectDetailsForm<E, I>.UPDATE_MODE;
+                updateForm.Show();
+                Enabled = false;
+            }
+        }
+
+        private void manageUserLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
             Enabled = false;
+            ManageUserForm manageUserForm = new ManageUserForm();
+            manageUserForm.setCurrentUser(currentUser);
+            manageUserForm.Show();
+            Close();
+        }
+
+        public void setCurrentUser(InvictusUser user)
+        {
+            currentUser = user;
+            currentUserRole = roleRepository.findById(currentUser.RoleName);
+        }
+
+        private void dataGridView_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private E getCurrentEntity()
+        {
+            E entity = default(E);
+            foreach (E e in bindingList)
+            {
+                foreach (PropertyInfo prop in props)
+                {
+                    if (prop.GetCustomAttribute(typeof(Id)) != null)
+                    {
+                        if (prop.GetValue(e).Equals(selectedEntityId))
+                        {
+                            entity = e;
+                        }
+                    }
+                }
+            }
+            return entity;
+        }
+
+        private void updateBtn_Click(object sender, EventArgs e)
+        {
+            E entity = getCurrentEntity();
+            if (entity != null)
+            {
+                foreach (PropertyInfo prop in props)
+                {
+                    if (prop.GetCustomAttribute(typeof(Id)) == null)
+                    {
+                        if (((Column)prop.GetCustomAttribute(typeof(Column))).Name ==
+                            dataGridView.Columns[dataGridView.CurrentCell.ColumnIndex].Name)
+                        {
+                            prop.SetValue(entity, dataGridView.CurrentCell.Value);
+                        }
+                    }
+                }
+                repository.update(entity);
+            }
         }
     }
 }

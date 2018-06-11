@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Invictus.Repository.Impl
 {
-    abstract class GenericRepositoryImpl<E, I> : GenericRepository<E, I>
+    public abstract class GenericRepositoryImpl<E, I> : GenericRepository<E, I>
     {
         protected ConnectionManager connectionManager = ConnectionManager.getInstance();
 
@@ -307,8 +307,6 @@ namespace Invictus.Repository.Impl
             List<Object> entityFieldObjects = new List<Object>();
             foreach (PropertyInfo prop in props)
             {
-                Id id = (Id)prop.GetCustomAttribute(typeof(Id));
-                Column column = (Column)prop.GetCustomAttribute(typeof(Column));
                 Object entityObject = prop.GetValue(entity);
                 entityFieldObjects.Add(entityObject);
             }

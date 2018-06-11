@@ -77,6 +77,29 @@
     <Compile Include="Forms\UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemberShip\InvictusLoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberShip\InvictusLoginForm.Designer.cs">
+      <DependentUpon>InvictusLoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberShip\InvictusRoleRepository.cs" />
+    <Compile Include="MemberShip\InvictusUser.cs" />
+    <Compile Include="MemberShip\InvictusUserManager.cs" />
+    <Compile Include="MemberShip\InvictusUserRepository.cs" />
+    <Compile Include="MemberShip\InvictusRole.cs" />
+    <Compile Include="MemberShip\ManageRoleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberShip\ManageRoleForm.Designer.cs">
+      <DependentUpon>ManageRoleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberShip\ManageUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberShip\ManageUserForm.Designer.cs">
+      <DependentUpon>ManageUserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\User.cs" />
@@ -96,6 +119,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ObjectDetailsForm.resx">
       <DependentUpon>ObjectDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberShip\InvictusLoginForm.resx">
+      <DependentUpon>InvictusLoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberShip\ManageRoleForm.resx">
+      <DependentUpon>ManageRoleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberShip\ManageUserForm.resx">
+      <DependentUpon>ManageUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
