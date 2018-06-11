@@ -28,17 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.manageRoleLink = new System.Windows.Forms.LinkLabel();
             this.groupBox.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // groupBox
+            // 
+            this.groupBox.Controls.Add(this.manageRoleLink);
+            this.groupBox.Controls.SetChildIndex(this.manageRoleLink, 0);
+            this.groupBox.Controls.SetChildIndex(this.tableNamelb, 0);
+            this.groupBox.Controls.SetChildIndex(this.createBtn, 0);
+            this.groupBox.Controls.SetChildIndex(this.deleteBtn, 0);
+            this.groupBox.Controls.SetChildIndex(this.updateBtn, 0);
             // 
             // tableNamelb
             // 
             this.tableNamelb.Size = new System.Drawing.Size(181, 32);
             this.tableNamelb.Text = "InvictusUsers";
             // 
-            // manageUserLink
+            // manageRoleLink
             // 
-            this.manageUserLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.manageUserLink_LinkClicked);
+            this.manageRoleLink.AutoSize = true;
+            this.manageRoleLink.Location = new System.Drawing.Point(608, 40);
+            this.manageRoleLink.Name = "manageRoleLink";
+            this.manageRoleLink.Size = new System.Drawing.Size(71, 13);
+            this.manageRoleLink.TabIndex = 6;
+            this.manageRoleLink.TabStop = true;
+            this.manageRoleLink.Text = "Manage Role";
+            this.manageRoleLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.manageRoleLink_LinkClicked);
             // 
             // ManageUserForm
             // 
@@ -54,5 +71,7 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.LinkLabel manageRoleLink;
     }
 }

@@ -11,16 +11,18 @@ using System.Windows.Forms;
 
 namespace Invictus.MemberShip
 {
-    public partial class ManageRoleForm : ManageForm<InvictusRole, String>
+    public partial class ManageRoleForm : InvictusBaseForm<InvictusRole, String>
     {
-        public ManageRoleForm()
+        private ManageUserForm userForm;
+        public ManageRoleForm(ManageUserForm userForm)
         {
+            this.userForm = userForm;
             InitializeComponent();
         }
 
-        private void ManageRoleForm_Load(object sender, EventArgs e)
+        private void ManageRoleForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            manageUserLink.Visible = false;
+            userForm.Enabled = true;
         }
     }
 }

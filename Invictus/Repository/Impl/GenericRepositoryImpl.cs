@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Invictus.Repository.Impl
 {
-    public abstract class GenericRepositoryImpl<E, I> : GenericRepository<E, I>
+    public abstract class GenericRepositoryImpl<E, I> : IGenericRepository<E, I>
     {
         protected ConnectionManager connectionManager = ConnectionManager.getInstance();
 

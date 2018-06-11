@@ -45,7 +45,7 @@ namespace Invictus.Forms
         {
             if (currentUser.RoleName == "Admin")
             {
-                manageUserLink.Visible = true;
+                //manageUserLink.Visible = true;
             }
             Table table = (Table)typeof(E).GetCustomAttribute(typeof(Table));
             tableNamelb.Text = table.Name;

@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Invictus.Attributes.Column" Collapsed="true">
+    <Position X="16.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\Column.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.Attributes.Id" Collapsed="true">
+    <Position X="16.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\Id.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.Attributes.RepoInterfaceImpl" Collapsed="true">
+    <Position X="18.75" Y="7.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\RepoInterfaceImpl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.Constants.ProductProperties">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAABACAQAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Constants\ProductProperties.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.Controls.MyIoC">
+    <Position X="15.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAQAAAAABACAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\MyIoC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.Forms.CategoryForm">
+    <Position X="10.25" Y="9.5" Width="1.5" />
+    <InheritanceLine Type="Invictus.Forms.InvictusBaseForm&lt;E, I&gt;" ManuallyRouted="true">
+      <Path>
+        <Point X="14.125" Y="8.531" />
+        <Point X="14.125" Y="9.118" />
+        <Point X="11" Y="9.118" />
+        <Point X="11" Y="9.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAgIAAAAASAAAAAAACCAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\CategoryForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.Forms.InvictusBaseForm&lt;E, I&gt;">
+    <Position X="5" Y="8.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AQALQAEAAgAiAASAYIBEAAAKAQDAAAAAAAEAAABBAAA=</HashCode>
+      <FileName>Forms\InvictusBaseForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.Forms.ObjectDetailsForm&lt;E, I&gt;">
+    <Position X="10.25" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAEAQBAAAAACABAAAgCAAAAIABCBAAAAAQAIAAAAAAA=</HashCode>
+      <FileName>Forms\ObjectDetailsForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.MemberShip.ManageRoleForm">
+    <Position X="15.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAACAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>MemberShip\Forms\ManageRoleForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.MemberShip.ManageUserForm">
+    <Position X="14" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACCAAAAAAACAAAACAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>MemberShip\Forms\ManageUserForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.MemberShip.InvictusLoginForm">
+    <Position X="8.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAIAQAAAACAAABAAAACAAAgSIA0AAAAAACAAAIAAAQA=</HashCode>
+      <FileName>MemberShip\InvictusLoginForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.MemberShip.InvictusRole">
+    <Position X="15.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAQAAAAAAAEAAAgAAABAAAA=</HashCode>
+      <FileName>MemberShip\InvictusRole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.MemberShip.InvictusUser">
+    <Position X="17.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAACAAAAEAAAAAA=</HashCode>
+      <FileName>MemberShip\InvictusUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.MemberShip.InvictusRoleRepository" Collapsed="true">
+    <Position X="7.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MemberShip\Repo\InvictusRoleRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.MemberShip.InvictusUserRepository" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MemberShip\Repo\InvictusUserRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.MemberShip.Forms.UserDetailForm" Collapsed="true">
+    <Position X="13" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QUgAUAQACCAwAAGAAACQAAACDGgBAABBACIEgIAAAAA=</HashCode>
+      <FileName>MemberShip\Forms\UserDetailForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.Models.Category" Collapsed="true">
+    <Position X="10.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.Models.Product" Collapsed="true">
+    <Position X="18.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAgAAAAAAAAAAAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Models\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.Repository.Impl.CategoryRepositoryImpl">
+    <Position X="5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repository\Impl\CategoryRepositoryImpl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.Repository.Impl.GenericRepositoryImpl&lt;E, I&gt;">
+    <Position X="4.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AECEAgAAACAAAAAAAgAAASGAEAAAAwAAAQBAQAAGBAA=</HashCode>
+      <FileName>Repository\Impl\GenericRepositoryImpl.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="3.727" />
+  </Class>
+  <Class Name="Invictus.Repository.Impl.ProductRepositoryImpl" Collapsed="true">
+    <Position X="9.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repository\Impl\ProductRepositoryImpl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.Repository.Impl.UserRepositoryImpl" Collapsed="true">
+    <Position X="2" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repository\Impl\UserRepositoryImpl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.Utils.ConnectionManager">
+    <Position X="20.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAABAEAQAAIAAAAAAAAA=</HashCode>
+      <FileName>Utils\ConnectionManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.Forms.InvictusBaseForm&lt;E, I&gt;">
+    <Position X="13" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAEAAAACABAACAAAAAAAAACAAARAAQAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Invictus.Attributes.Table" Collapsed="true">
+    <Position X="21.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\Table.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Invictus.Repository.IGenericRepository&lt;E, I&gt;">
+    <Position X="0.75" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQEAEAAAAAAAAABAQAAEAAA=</HashCode>
+      <FileName>Repository\IGenericRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

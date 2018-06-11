@@ -77,27 +77,33 @@
     <Compile Include="Forms\UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemberShip\Forms\UserDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberShip\Forms\UserDetailForm.Designer.cs">
+      <DependentUpon>UserDetailForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MemberShip\InvictusLoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MemberShip\InvictusLoginForm.Designer.cs">
       <DependentUpon>InvictusLoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MemberShip\InvictusRoleRepository.cs" />
+    <Compile Include="MemberShip\Repo\InvictusRoleRepository.cs" />
     <Compile Include="MemberShip\InvictusUser.cs" />
     <Compile Include="MemberShip\InvictusUserManager.cs" />
-    <Compile Include="MemberShip\InvictusUserRepository.cs" />
+    <Compile Include="MemberShip\Repo\InvictusUserRepository.cs" />
     <Compile Include="MemberShip\InvictusRole.cs" />
-    <Compile Include="MemberShip\ManageRoleForm.cs">
+    <Compile Include="MemberShip\Forms\ManageRoleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MemberShip\ManageRoleForm.Designer.cs">
+    <Compile Include="MemberShip\Forms\ManageRoleForm.Designer.cs">
       <DependentUpon>ManageRoleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MemberShip\ManageUserForm.cs">
+    <Compile Include="MemberShip\Forms\ManageUserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MemberShip\ManageUserForm.Designer.cs">
+    <Compile Include="MemberShip\Forms\ManageUserForm.Designer.cs">
       <DependentUpon>ManageUserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs" />
@@ -105,28 +111,31 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Repository\Impl\CategoryRepositoryImpl.cs" />
     <Compile Include="Repository\Impl\GenericRepositoryImpl.cs" />
     <Compile Include="Repository\Impl\ProductRepositoryImpl.cs" />
     <Compile Include="Repository\Impl\UserRepositoryImpl.cs" />
-    <Compile Include="Repository\ProductRepository.cs" />
-    <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Utils\ConnectionManager.cs" />
+    <EmbeddedResource Include="Forms\CategoryForm.resx">
+      <DependentUpon>CategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\InvictusBaseForm.resx">
       <DependentUpon>InvictusBaseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ObjectDetailsForm.resx">
       <DependentUpon>ObjectDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MemberShip\Forms\UserDetailForm.resx">
+      <DependentUpon>UserDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MemberShip\InvictusLoginForm.resx">
       <DependentUpon>InvictusLoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MemberShip\ManageRoleForm.resx">
+    <EmbeddedResource Include="MemberShip\Forms\ManageRoleForm.resx">
       <DependentUpon>ManageRoleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MemberShip\ManageUserForm.resx">
+    <EmbeddedResource Include="MemberShip\Forms\ManageUserForm.resx">
       <DependentUpon>ManageUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -138,6 +147,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

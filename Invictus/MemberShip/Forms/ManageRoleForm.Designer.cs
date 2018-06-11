@@ -43,7 +43,7 @@
             this.ClientSize = new System.Drawing.Size(748, 777);
             this.Name = "ManageRoleForm";
             this.Text = "ManageRoleForm";
-            this.Load += new System.EventHandler(this.ManageRoleForm_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ManageRoleForm_FormClosing);
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
             this.ResumeLayout(false);

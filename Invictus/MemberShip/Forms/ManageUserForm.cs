@@ -16,15 +16,14 @@ namespace Invictus.MemberShip
         public ManageUserForm()
         {
             InitializeComponent();
-            manageUserLink.Text = "Manage role";
         }
 
-        private void manageUserLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void manageRoleLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ManageRoleForm manageRoleForm = new ManageRoleForm();
+            ManageRoleForm manageRoleForm = new ManageRoleForm(this);
             manageRoleForm.setCurrentUser(currentUser);
             manageRoleForm.Show();
-            Close();
+            Enabled = false;
         }
     }
 }

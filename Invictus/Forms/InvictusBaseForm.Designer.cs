@@ -32,12 +32,11 @@ namespace Invictus.Forms
         private void InitializeComponent()
         {
             this.groupBox = new System.Windows.Forms.GroupBox();
-            this.manageUserLink = new System.Windows.Forms.LinkLabel();
+            this.updateBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.createBtn = new System.Windows.Forms.Button();
             this.tableNamelb = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.updateBtn = new System.Windows.Forms.Button();
             this.groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -45,7 +44,6 @@ namespace Invictus.Forms
             // groupBox
             // 
             this.groupBox.Controls.Add(this.updateBtn);
-            this.groupBox.Controls.Add(this.manageUserLink);
             this.groupBox.Controls.Add(this.deleteBtn);
             this.groupBox.Controls.Add(this.createBtn);
             this.groupBox.Controls.Add(this.tableNamelb);
@@ -56,18 +54,16 @@ namespace Invictus.Forms
             this.groupBox.TabIndex = 0;
             this.groupBox.TabStop = false;
             // 
-            // manageUserLink
+            // updateBtn
             // 
-            this.manageUserLink.AutoSize = true;
-            this.manageUserLink.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.manageUserLink.Location = new System.Drawing.Point(630, 16);
-            this.manageUserLink.Name = "manageUserLink";
-            this.manageUserLink.Size = new System.Drawing.Size(87, 19);
-            this.manageUserLink.TabIndex = 4;
-            this.manageUserLink.TabStop = true;
-            this.manageUserLink.Text = "Manage user";
-            this.manageUserLink.Visible = false;
-            this.manageUserLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.manageUserLink_LinkClicked);
+            this.updateBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateBtn.Location = new System.Drawing.Point(495, 204);
+            this.updateBtn.Name = "updateBtn";
+            this.updateBtn.Size = new System.Drawing.Size(75, 33);
+            this.updateBtn.TabIndex = 5;
+            this.updateBtn.Text = "Update";
+            this.updateBtn.UseVisualStyleBackColor = true;
+            this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
             // 
             // deleteBtn
             // 
@@ -114,17 +110,6 @@ namespace Invictus.Forms
             this.dataGridView.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellLeave);
             this.dataGridView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView_MouseClick);
             // 
-            // updateBtn
-            // 
-            this.updateBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateBtn.Location = new System.Drawing.Point(495, 204);
-            this.updateBtn.Name = "updateBtn";
-            this.updateBtn.Size = new System.Drawing.Size(75, 33);
-            this.updateBtn.TabIndex = 5;
-            this.updateBtn.Text = "Update";
-            this.updateBtn.UseVisualStyleBackColor = true;
-            this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
-            // 
             // InvictusBaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -148,7 +133,6 @@ namespace Invictus.Forms
         protected System.Windows.Forms.Label tableNamelb;
         protected System.Windows.Forms.Button createBtn;
         protected System.Windows.Forms.Button deleteBtn;
-        public System.Windows.Forms.LinkLabel manageUserLink;
         protected System.Windows.Forms.Button updateBtn;
     }
 }

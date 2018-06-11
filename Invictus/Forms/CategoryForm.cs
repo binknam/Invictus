@@ -1,4 +1,6 @@
-﻿using Invictus.Models;
+﻿using Invictus.MemberShip;
+using Invictus.MemberShip.Forms;
+using Invictus.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +18,20 @@ namespace Invictus.Forms
         public CategoryForm()
         {
             InitializeComponent();
+        }
+
+        private void manageUserLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ManageUserForm manageUserForm = new ManageUserForm();
+            manageUserForm.setCurrentUser(currentUser);
+            manageUserForm.Show();
+            Close();
+        }
+
+        private void userDetailLb_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            UserDetailForm userDetailForm = new UserDetailForm(currentUser);
+            userDetailForm.Show();
         }
     }
 }

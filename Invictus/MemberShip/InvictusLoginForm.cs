@@ -1,5 +1,6 @@
 ﻿using Invictus.Controls;
 using Invictus.Forms;
+using Invictus.MemberShip.Forms;
 using Invictus.Repository;
 using System;
 using System.Collections.Generic;
@@ -55,9 +56,8 @@ namespace Invictus.MemberShip
 
         private void registerLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ObjectDetailsForm<InvictusUser, String>  createForm = new ObjectDetailsForm<InvictusUser, String>();
-            createForm.type = ObjectDetailsForm<InvictusUser, String>.REGISTER_MODE;
-            createForm.Show();
+            UserDetailForm userDetailForm = new UserDetailForm();
+            userDetailForm.Show();
         }
     }
 }
