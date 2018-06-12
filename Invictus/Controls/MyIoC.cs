@@ -28,7 +28,27 @@ namespace Invictus.Controls
                 RepoInterfaceImpl repoInterfaceImpl = (RepoInterfaceImpl)type.GetCustomAttribute(typeof(RepoInterfaceImpl));
                 if (repoInterfaceImpl != null)
                 {
-                    managedObjects.Add(repoInterfaceImpl.TypeOfSuper, Activator.CreateInstance(type));
+                    ConstructorInfo constructor = type.GetConstructor(Type.EmptyTypes);
+                    managedObjects.Add(repoInterfaceImpl.TypeOfModel, constructor.Invoke(new object[0]));
+                }
+            }
+            foreach (Type type in assembly.GetTypes())
+            {
+                Controller controller = (Controller)type.GetCustomAttribute(typeof(Controller));
+                if (controller != null)
+                {
+                    Type[] listTypeOfModel = controller.ListTypeOfModel;
+                    Type typeObject = typeof(object[]);
+                    Type[] typeObjects = new Type[1];
+                    typeObjects[0] = typeObject;
+                    ConstructorInfo constructor = type.GetConstructor(typeObjects);
+                    object[] repositories = new object[listTypeOfModel.Length];
+                    for (int i = 0; i < listTypeOfModel.Length; i++)
+                    {
+                        repositories[i] = get(listTypeOfModel[i]);
+                    }
+                    Object a = constructor.Invoke(new object[] {repositories });
+                    managedObjects.Add(type, a);
                 }
             }
         }

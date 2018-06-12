@@ -17,7 +17,7 @@ namespace Invictus.Forms
 {
     public partial class InvictusBaseForm<E, I> : Form
     {
-        protected GenericRepository<E, I> repository;
+        protected IGenericRepository<E, I> repository;
         protected MyIoC myIoC;
         protected ObjectDetailsForm<E, I> createForm;
         protected ObjectDetailsForm<E, I> updateForm;
@@ -34,7 +34,7 @@ namespace Invictus.Forms
         public InvictusBaseForm()
         {
             myIoC = MyIoC.getInstance();
-            repository = (GenericRepository<E, I>)myIoC.get(typeof(E));
+            repository = (IGenericRepository<E, I>)myIoC.get(typeof(E));
             roleRepository = new InvictusRoleRepository();
             currentUser = new InvictusUser();
             currentUserRole = new InvictusRole();

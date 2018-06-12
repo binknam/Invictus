@@ -1,4 +1,5 @@
-﻿using Invictus.Controls;
+﻿using Invictus.Controllers;
+using Invictus.Controls;
 using Invictus.Forms;
 using Invictus.MemberShip.Forms;
 using Invictus.Repository;
@@ -16,13 +17,13 @@ namespace Invictus.MemberShip
 {
     public partial class InvictusLoginForm : Form
     {
-        private GenericRepository<InvictusUser, String> userRepository;
+        private LoginController loginController;
         private MyIoC myIoC;
         private InvictusUser user;
         public InvictusLoginForm()
         {
             myIoC = MyIoC.getInstance();
-            userRepository = (GenericRepository<InvictusUser, String>) myIoC.get(typeof(InvictusUser));
+            loginController = (LoginController) myIoC.get(typeof(LoginController));
             user = new InvictusUser();
             InitializeComponent();
         }
@@ -43,7 +44,7 @@ namespace Invictus.MemberShip
         {
             if(usernamTxt.Text!="" && passwordTxt.Text!="")
             {
-                user = userRepository.findById(user.Username);
+                user = loginController.invictusUserRepository.findById(user.Username);
                 if (user.Password != null && user.Password == passwordTxt.Text)
                 {
                     CategoryForm categoryForm = new CategoryForm();

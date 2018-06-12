@@ -48,10 +48,13 @@
   <ItemGroup>
     <Compile Include="Attributes\Column.cs" />
     <Compile Include="Attributes\Id.cs" />
+    <Compile Include="Attributes\Controller.cs" />
     <Compile Include="Attributes\RepoInterfaceImpl.cs" />
     <Compile Include="Attributes\Table.cs" />
     <Compile Include="Constants\ProductProperties.cs" />
     <Compile Include="Constants\Queries.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\UserDetailController.cs" />
     <Compile Include="Controls\MyIoC.cs" />
     <Compile Include="Forms\CategoryForm.cs">
       <SubType>Form</SubType>
@@ -71,12 +74,6 @@
     <Compile Include="Forms\ObjectDetailsForm.Designer.cs">
       <DependentUpon>ObjectDetailsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UserForm.Designer.cs">
-      <DependentUpon>UserForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="MemberShip\Forms\UserDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,7 +88,6 @@
     </Compile>
     <Compile Include="MemberShip\Repo\InvictusRoleRepository.cs" />
     <Compile Include="MemberShip\InvictusUser.cs" />
-    <Compile Include="MemberShip\InvictusUserManager.cs" />
     <Compile Include="MemberShip\Repo\InvictusUserRepository.cs" />
     <Compile Include="MemberShip\InvictusRole.cs" />
     <Compile Include="MemberShip\Forms\ManageRoleForm.cs">
@@ -111,7 +107,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\GenericRepository.cs" />
+    <Compile Include="Repository\IGenericRepository.cs" />
     <Compile Include="Repository\Impl\CategoryRepositoryImpl.cs" />
     <Compile Include="Repository\Impl\GenericRepositoryImpl.cs" />
     <Compile Include="Repository\Impl\ProductRepositoryImpl.cs" />
@@ -164,5 +160,6 @@
   <ItemGroup>
     <Content Include="databaseConfig.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

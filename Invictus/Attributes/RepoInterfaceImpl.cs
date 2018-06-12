@@ -9,15 +9,15 @@ namespace Invictus.Attributes
     [AttributeUsage(AttributeTargets.Class)]
     class RepoInterfaceImpl : Attribute
     {
-        private Type typeOfSuper;
-        public RepoInterfaceImpl(Type typeOfSuper)
+        private Type typeOfModel;
+        public RepoInterfaceImpl(Type typeOfModel)
         {
-            this.typeOfSuper = typeOfSuper;
+            this.typeOfModel = typeOfModel;
         }
 
-        public virtual Type TypeOfSuper
+        public virtual Type TypeOfModel
         {
-            get { return typeOfSuper; }
+            get { return typeOfModel; }
         }
     }
 }

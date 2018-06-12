@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Invictus.MemberShip
 {
     [RepoInterfaceImpl(typeof(InvictusUser))]
-    class InvictusUserRepository : GenericRepositoryImpl<InvictusUser, String>
+    public class InvictusUserRepository : GenericRepositoryImpl<InvictusUser, String>
     {
         protected override Type getEntityClass()
         {

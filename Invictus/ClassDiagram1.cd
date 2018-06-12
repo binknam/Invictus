@@ -14,11 +14,12 @@
       <FileName>Attributes\Id.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Invictus.Attributes.RepoInterfaceImpl" Collapsed="true">
+  <Class Name="Invictus.Attributes.Controller" Collapsed="true">
     <Position X="18.75" Y="7.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
-      <FileName>Attributes\RepoInterfaceImpl.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\Controller.cs</FileName>
+      <NewMemberFileName>Attributes\RepoInterfaceImpl.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Invictus.Constants.ProductProperties">
@@ -116,7 +117,7 @@
   <Class Name="Invictus.MemberShip.Forms.UserDetailForm" Collapsed="true">
     <Position X="13" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QUgAUAQACCAwAAGAAACQAAACDGgBAABBACIEgIAAAAA=</HashCode>
+      <HashCode>QUgAUAQACCAQAAGAAQCQAAACDGgBAABBACIEgAAAAAA=</HashCode>
       <FileName>MemberShip\Forms\UserDetailForm.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -147,7 +148,7 @@
       <HashCode>AECEAgAAACAAAAAAAgAAASGAEAAAAwAAAQBAQAAGBAA=</HashCode>
       <FileName>Repository\Impl\GenericRepositoryImpl.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Orientation="Left" Position="3.727" />
+    <Lollipop Orientation="Bottom" Position="0.1" />
   </Class>
   <Class Name="Invictus.Repository.Impl.ProductRepositoryImpl" Collapsed="true">
     <Position X="9.5" Y="1.75" Width="1.5" />

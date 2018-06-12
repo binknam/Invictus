@@ -16,7 +16,7 @@ namespace Invictus.Forms
 {
     public partial class ObjectDetailsForm<E, I> : Form
     {
-        protected GenericRepository<E, I> repository;
+        protected IGenericRepository<E, I> repository;
         protected MyIoC myIoC;
         protected E entity;
         protected PropertyInfo[] props;
@@ -33,7 +33,7 @@ namespace Invictus.Forms
         public ObjectDetailsForm(InvictusBaseForm<E, I> mainForm)
         {
             myIoC = MyIoC.getInstance();
-            repository = (GenericRepository<E, I>)myIoC.get(typeof(E));
+            repository = (IGenericRepository<E, I>)myIoC.get(typeof(E));
             this.mainForm = mainForm;
             InitializeComponent();
         }
@@ -41,7 +41,7 @@ namespace Invictus.Forms
         public ObjectDetailsForm()
         {
             myIoC = MyIoC.getInstance();
-            repository = (GenericRepository<E, I>)myIoC.get(typeof(E));
+            repository = (IGenericRepository<E, I>)myIoC.get(typeof(E));
             InitializeComponent();
         }
 

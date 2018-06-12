@@ -1,4 +1,5 @@
-﻿using Invictus.Controls;
+﻿using Invictus.Controllers;
+using Invictus.Controls;
 using Invictus.Repository;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,7 @@ namespace Invictus.MemberShip.Forms
 {
     public partial class UserDetailForm : Form
     {
-        protected GenericRepository<InvictusUser, String> userRepository;
-        protected GenericRepository<InvictusRole, String> roleRepository;
+        protected UserDetailController userDetailController;
         protected MyIoC myIoC;
         protected InvictusUser currentUser;
         protected InvictusRole currentUserRole;
@@ -26,8 +26,7 @@ namespace Invictus.MemberShip.Forms
         {
             type = 1;
             myIoC = MyIoC.getInstance();
-            userRepository = (GenericRepository <InvictusUser, String>)myIoC.get(typeof(InvictusUser));
-            roleRepository = (GenericRepository <InvictusRole, String>)myIoC.get(typeof(InvictusRole));
+            userDetailController = (UserDetailController)myIoC.get(typeof(UserDetailController));
             InitializeComponent();
         }
 
@@ -35,10 +34,9 @@ namespace Invictus.MemberShip.Forms
         {
             type = 0;
             myIoC = MyIoC.getInstance();
-            userRepository = (GenericRepository<InvictusUser, String>)myIoC.get(typeof(InvictusUser));
-            roleRepository = (GenericRepository<InvictusRole, String>)myIoC.get(typeof(InvictusRole));
+            userDetailController = (UserDetailController)myIoC.get(typeof(UserDetailController));
             currentUser = user;
-            currentUserRole = roleRepository.findById(currentUser.RoleName);
+            currentUserRole = userDetailController.invictusRoleRepository.findById(currentUser.RoleName);
             InitializeComponent();
         }
 
@@ -104,7 +102,7 @@ namespace Invictus.MemberShip.Forms
                 if (currentUser.Password == oldPassword && newPWTxt.Text == confirmPWTxt.Text)
                 {
                     currentUser.Password = newPWTxt.Text;
-                    userRepository.update(currentUser);
+                    userDetailController.invictusUserRepository.update(currentUser);
 
                 }
             }
@@ -112,8 +110,8 @@ namespace Invictus.MemberShip.Forms
             {
                 if (currentUser.Password == confirmPWTxt.Text && currentUser.Username != "" && currentUser.Password != "")
                 {
-                    currentUser.RoleName = roleRepository.findById(RoleDefautId).Name;
-                    userRepository.create(currentUser);
+                    currentUser.RoleName = userDetailController.invictusRoleRepository.findById(RoleDefautId).Name;
+                    userDetailController.invictusUserRepository.create(currentUser);
                 }
             }
             Close();
